@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado de Cotización</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-purple">Hola {{ nombre }}</h1>
+        <h5>Fecha de evento: {{ fecha }}</h5>
+        <h5>#Personas: {{ cantidad }}</h5>
+        <h5>Número de coordinadores asignados: {{ num_coordinadores }}</h5>
+
+        <h2>Servicios base incluidos:</h2>
+        <h3>Precio Base: $4900</h3>
+        <table class="table table-bordered">
+                <thead>
+                        <tr>
+                                <tr>Servicio</tr>
+                        </tr>
+                </thead>
+                <tbody>
+                        {% for servicio in servicios_base %}
+                        <tr>
+                                <td>{{ servicio }}</td>
+                        </tr>
+                        {% endfor %}
+                </tbody>
+        </table>
+
+
+        <h2>Servicios seleccionados:</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Servicio</th>
+                    <th>Costo</th>
+                </tr>
+            </thead>
+            {% set ns = namespace(total_servicios=0) %}
+            <tbody>
+                {% for servicio, costo in servicios %}
+                <tr>
+                    <td>{{ servicio }}</td>
+                    <td>${{ costo }}</td>
+                    {% set ns.total_servicios = ns.total_servicios + costo %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% set precio_base = 4900 %}
+        {% set coordinadores_extra = num_coordinadores - 2 %}
+        {% if coordinadores_extra > 0 %}
+            {% set costo_extra = coordinadores_extra * 1000 %}
+        {% else %}
+            {% set costo_extra = 0 %}
+        {% endif %}
+        {% set total = precio_base + costo_extra + ns.total_servicios %}
+
+        <h3 class="mt-4">Total de la cotización: ${{ total }}</h3>
+
+        <form action="/pagos" method="POST">
+            <input type="hidden" name="nombre" value="{{ nombre }}">
+            <input type="hidden" name="fecha_evento" value="{{ fecha }}">
+            <input type="hidden" name="total_cotizacion" value="{{ total }}">
+            <button type="submit" class="btn btn-purple mt-3">Ver Plan de Pagos</button>
+        </form>
+    </div>
+</body>
+</html>

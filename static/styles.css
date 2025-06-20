@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdfdfd;
+}
+
+.main-title {
+    color: #7030a0;
+    font-size: 3em;
+    margin: 0;
+}
+
+.sub-title {
+    font-style: italic;
+    color: #7030a0;
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+
+.btn-purple {
+    background-color: #7030a0;
+    border-color: #7030a0;
+    color: #ffffff;
+}
+
+.btn-purple:hover {
+    background-color: #5a247f;
+    border-color: #5a247f;
+}
+.text-purple{
+    color: #7030a0
+}

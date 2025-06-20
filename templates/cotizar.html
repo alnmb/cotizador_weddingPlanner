@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cotización</title>
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 class="text-purple">Hola {{ nombre }}</h1>
+            <h5>Fecha de evento: {{ fecha }}</h5>
+            <h5>#Personas: {{ cantidad }}</h5>
+            <p class="text-muted">Del siguiente catálogo de servicios que
+                ofrecemos, elige lo que más te interese:</p>
+
+            <form action="/resultado" method="POST">
+                <!-- Campos ocultos para pasar datos -->
+                <input type="hidden" name="nombre" value="{{ nombre }}">
+                <input type="hidden" name="fecha" value="{{ fecha }}">
+                <input type="hidden" name="cantidad" value="{{ cantidad }}">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Seleccionar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for servicio, costo in servicios %}
+                        <tr>
+                            <td>{{ servicio }}</td>
+                            <td><input type="checkbox" name="servicios"
+                                    value="{{ servicio }}"></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-purple">Cotizar</button>
+            </form>
+        </div>
+    </body>
+</html>

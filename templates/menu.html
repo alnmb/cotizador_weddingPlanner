@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .btn-purple {
+            background-color: #6f42c1;
+            color: white;
+            border: none;
+        }
+        .btn-purple:hover {
+            background-color: #5a32a3;
+        }
+        .menu-container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 40px;
+        }
+        .btn-block {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Elija la opción deseada</h1>
+        <form action="/datos" method="POST">
+            <input type="hidden" name="nombre" value="{{ nombre }}">
+            <input type="hidden" name="fecha" value="{{ fecha_evento }}">
+            <input type="hidden" name="cantidad" value="{{ cantidad_personas }}">
+            <button type="submit" class="btn btn-purple btn-block">Arma tu boda</button>
+        </form>
+        <form action="/wedding_exp" method="POST">
+            <input type="hidden" name="nombre" value="{{ nombre }}">
+            <input type="hidden" name="fecha" value="{{ fecha_evento }}">
+            <input type="hidden" name="cantidad" value="{{ cantidad_personas }}">
+            <button type="submit" class="btn btn-purple btn-block">Wedding Experience</button>
+        </form>
+        <form action="/wedding_dream" method="POST">
+            <input type="hidden" name="nombre" value="{{ nombre }}">
+            <input type="hidden" name="fecha" value="{{ fecha_evento }}">
+            <input type="hidden" name="cantidad" value="{{ cantidad_personas }}">
+            <button type="submit" class="btn btn-purple btn-block">Wedding Dream</button>
+        </form>
+        <form action="/wedding_day" method="POST">
+            <input type="hidden" name="nombre" value="{{ nombre }}">
+            <input type="hidden" name="fecha" value="{{ fecha_evento }}">
+            <input type="hidden" name="cantidad" value="{{ cantidad_personas }}">
+            <button type="submit" class="btn btn-purple btn-block">Wedding Day</button>
+        </form>
+    </div>
+</body>
+</html>
+

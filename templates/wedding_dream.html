@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Plan de Pagos</title>
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 class="text-purple">Plan de Pagos - Wedding Dream</h1>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fecha de la boda</td>
+                        <td>{{ fecha_evento }}</td>
+                    </tr>
+                    <tr>
+                        <td>Costo</td>
+                        <td>${{ total_cotizacion }}</td>
+                    </tr>
+                    <tr>
+                        <td>Apartado Fecha</td>
+                        <td>${{ apartado_fecha }}</td>
+                    </tr>
+                    <tr>
+                        <td>Anticipo</td>
+                        <td>${{ anticipo }}</td>
+                    </tr>
+                    <tr>
+                        <td>Restante</td>
+                        <td>${{ restante }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+
+        <form action="/pagos" method="POST">
+          <input type="hidden" name="nombre" value="{{ nombre }}">
+          <input type="hidden" name="fecha_evento" value="{{ fecha_evento }}">
+          <input type="hidden" name="total_cotizacion" value="{{ total_cotizacion }}">
+
+          <div class="form-group mt-4">
+            <label for="fecha_pago">Selecciona tu fecha de pago preferida:</label>
+                <select class="form-control" id="fecha_pago" name="fecha_pago" required>
+                  <option value="15" {% if fecha_pago == '15' %}selected{% endif %}>Día 15 de cada mes</option>
+                  <option value="30" {% if fecha_pago == '30' %}selected{% endif %}>Día 30 de cada mes</option>
+                </select>
+          </div>
+
+          <button type="submit" class="btn btn-purple mt-3">Confirmar Fecha de Pago</button>
+        </form>
+
+
+        <div class="mt-5">
+        <h2 class="text-purple">Calendario de Pagos</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Concepto</th>
+                <th>Valor</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Fecha de anticipo</td>
+                <td>{{ fecha_anticipo }}</td>
+            </tr>
+            <tr>
+                <td>Primera mensualidad</td>
+                <td>{{ fecha_primera_mensualidad }}</td>
+            </tr>
+            <tr>
+                <td>Último pago</td>
+                <td>{{ fecha_ultimo_pago }}</td>
+            </tr>
+            <tr>
+                <td>Sugerencia de MSI</td>
+                <td>{{ sugerencia_msi }}</td>
+            </tr>
+            <tr>
+                <td>Mensualidad estimada</td>
+                <td>${{ mensualidad }}</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        
+        <div class="mt-4 d-flex justify-content-between align-items-start">
+          <button class="btn btn-secondary" onclick="window.print()">Imprimir PDF</button>
+          <a href="/" class="btn btn-purple">Volver al inicio</a>
+        </div>
+
+        </div>
+    </body>
+</html>
