@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import pandas as pd
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import os
 
 
 def cant_coordinadores(cantidad_personas):
